@@ -3,26 +3,27 @@ syntax enable
 
 " Copy to X11 clipboard
 set clipboard=unnamedplus
+
 " Show numbers
 set number
+
 " Show searchs
 set incsearch
+
 " Automatic indent
 set autoindent
-set relativenumber
 
+" Convert tabs to spaces
 set expandtab
+
+" Number of columns for a smooth tabulation
 set softtabstop=2
+
+" Number of columns to move the line when using editing commands
 set shiftwidth=2
 
-set autoindent
-" set textwidth=80
-
-" Show numbers in netrw
+" Show line numbers in netrw
 let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
-
-" E command open Explore
-" command! E Explore
 
 autocmd FileType markdown setlocal spell spelllang=en_us,pt_br
 autocmd FileType markdown set tabstop=2
@@ -47,36 +48,25 @@ hi Normal guibg=NONE ctermbg=NONE
 highlight RedundantSpaces ctermbg=red guibg=red
 match RedundantSpaces /\s\+$/
 
-" Autocomplete
-" filetype plugin on
-" set omnifunc=syntaxcomplete#Complete
-
 " tell it to use an undo file
 set undofile
 " set a directory to store the undo history
 set undodir=/home/marcmatias/.vimundo/
 
 " Powerline config
-python3 from powerline.vim import setup as powerline_setup
-python3 powerline_setup()
-python3 del powerline_setup
+" python3 from powerline.vim import setup as powerline_setup
+" python3 powerline_setup()
+" python3 del powerline_setup
 
 " Minibar showing actual file
 " set laststatus=2
 
 " Plugins
-call plug#begin()
-
-" Use release branch (recommend)
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'mattn/emmet-vim'
-
-Plug 'heavenshell/vim-jsdoc', {
-  \ 'for': ['javascript', 'javascript.jsx','typescript'],
-  \ 'do': 'make install'
-\}
-
-call plug#end()
+filetype plugin indent on
+if !has('nvim')
+  packadd editorconfig
+  packadd comment
+endif
 
 " Make <CR> to accept selected completion item or notify coc.nvim to format
 " <C-g>u breaks current undo, please make your own choice.
