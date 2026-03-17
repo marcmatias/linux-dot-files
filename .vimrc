@@ -118,15 +118,20 @@ let g:vimwiki_list = [{
       \ }]
 
 let g:vimwiki_markdown_link_ext = 1
-let g:vimwiki_hl_cb_checked = 1
+
+" Enable syntax style colors
+let g:vimwiki_listing_hl = 1
+
+" Make check apply a different color to entire text even with breaklines
+let g:vimwiki_hl_cb_checked = 2
 
 " Restrict Vimwiki's operation to only those paths listed in g:vimwiki_list
 let g:vimwiki_global_ext = 0
 
-" Ignore Acessos folders
+" Ignore Acessos folders, we use these to save encrypted files
 set wildignore+=*/Acessos/*
 
-" Enalbe Acessos folders to Vimwiki link accesses
+" Enalbe Acessos folders to Vimwiki link accesses only
 function! VimwikiFollowLinkBypass()
   " Save current wildignore
   let l:old_ignore = &wildignore
@@ -163,4 +168,11 @@ function! FixVimwikiEnter()
 endfunction
 
 autocmd FileType vimwiki call FixVimwikiEnter()
+
+" Add quot text comment style
+augroup vimwiki_blockquote
+    autocmd!
+    autocmd FileType vimwiki syntax match VimwikiBlockquote /^>.*/ contains=@Spell
+    autocmd FileType vimwiki hi link VimwikiBlockquote Comment
+augroup END
 " End Vimwiki setup
