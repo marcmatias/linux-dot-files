@@ -1,6 +1,6 @@
 set encoding=utf-8
 
-" # Vimwiki prerequisites
+" Vimwiki prerequisites
 " Disable compatibility with vi mode
 set nocompatible
 " Load specific plugins based on file type
@@ -27,19 +27,19 @@ set expandtab
 " Number of columns for a smooth tabulation
 set softtabstop=2
 
+" Number of columns to move the line when using editing commands
+set shiftwidth=2
+
 " Line break
 set list
 "set listchars=eol:↳,
-set listchars=trail:·
-
-" Number of columns to move the line when using editing commands
-set shiftwidth=2
+set listchars=tab:\ \ ,trail:·
 
 " Show line numbers in netrw
 let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
 
 autocmd FileType markdown setlocal spell spelllang=en_us,pt_br
-autocmd FileType markdown set tabstop=2 textwidth=80
+autocmd FileType markdown set tabstop=4 textwidth=80
 
 " Treat all .md files as markdown
 autocmd BufNewFile,BufRead *.md set filetype=markdown
@@ -76,14 +76,6 @@ set undodir=~/.vimundo/
 " Add mapping for CTRL+SHIFT+C to copy selected text to clipboard wayland
 xnoremap <silent> <C-S-C> :w !wl-copy<CR><CR>
 
-" Powerline config
-python3 from powerline.vim import setup as powerline_setup
-python3 powerline_setup()
-python3 del powerline_setup
-
-" Minibar showing actual file
-" set laststatus=2
-
 " # Plugins
 filetype indent on
 if !has('nvim')
@@ -117,8 +109,6 @@ let g:vimwiki_list = [{
       \ 'ext': 'md'
       \ }]
 
-let g:vimwiki_markdown_link_ext = 1
-
 " Enable syntax style colors
 let g:vimwiki_listing_hl = 1
 
@@ -131,7 +121,7 @@ let g:vimwiki_global_ext = 0
 " Ignore Acessos folders, we use these to save encrypted files
 set wildignore+=*/Acessos/*
 
-" Enalbe Acessos folders to Vimwiki link accesses only
+" Enable Acessos folders to Vimwiki link accesses only
 function! VimwikiFollowLinkBypass()
   " Save current wildignore
   let l:old_ignore = &wildignore
